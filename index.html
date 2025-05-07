@@ -221,58 +221,27 @@
                     </div>
                 </div>
                 <div class="column right">
-                    <div class="text">For Any Queries....</div>
-                    <form id="contact-form">
-    <div class="fields">
-        <div class="field name">
-            <input type="text" name="name" placeholder="Name" required>
-        </div>
-        <div class="field email">
-            <input type="email" name="email" placeholder="Email" required>
-        </div>
-    </div>
-    <div class="field">
-        <input type="number" name="phone" placeholder="Phone Number:" required>
-    </div>
-    <div class="field textarea">
-        <textarea name="message" cols="30" rows="10" placeholder="Message.." required></textarea>
-    </div>
-    <div class="button-area">
-        <button type="submit" class="fas fa-envelope"> Send message</button>
-    </div>
-</form>
-
-<p id="response-msg" style="margin-top: 10px;"></p>
-
-<script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbySjA894VIop9TzrORriaoywY2WIaEGlLv-5TGUXjhwnAlWVyeB4GGKJy9ErLxhJb13/exec';
-
-  const form = document.getElementById('contact-form');
-  const responseMsg = document.getElementById('response-msg');
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    responseMsg.innerHTML = "Sending...";
-
-    const formData = new FormData(form);
-
-    fetch(scriptURL, { method: 'POST', body: formData })
-      .then(response => {
-        if (response.ok) {
-          responseMsg.innerHTML = "Message sent successfully!";
-          form.reset();
-        } else {
-          responseMsg.innerHTML = "There was an error sending your message. Please try again later.";
-        }
-      })
-      .catch(error => {
-        console.error("Error!", error.message);
-        responseMsg.innerHTML = "There was an error sending your message. Please try again later.";
-      });
-  });
-</script>
-
-
+                    <div class="text">For Queries</div>
+                    <form action="#">
+                        <div class="fields">
+                            <div class="field name">
+                                <input type="text" placeholder="Name" required>
+                            </div>
+                            <div class="field email">
+                                <input type="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input type="number" placeholder="Phone Number:" required>
+                        </div>
+                        <div class="field textarea">
+                            <textarea cols="30" rows="10" placeholder="Message.." required></textarea>
+                        </div>
+                        <div class="button-area">
+                          
+                            <button type="submit" class="fas fa-envelope" >  Send message</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
