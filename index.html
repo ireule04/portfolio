@@ -222,26 +222,58 @@
                 </div>
                 <div class="column right">
                     <div class="text">For Queries</div>
-                    <form action="#">
-                        <div class="fields">
-                            <div class="field name">
-                                <input type="text" placeholder="Name" required>
-                            </div>
-                            <div class="field email">
-                                <input type="email" placeholder="Email" required>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <input type="number" placeholder="Phone Number:" required>
-                        </div>
-                        <div class="field textarea">
-                            <textarea cols="30" rows="10" placeholder="Message.." required></textarea>
-                        </div>
-                        <div class="button-area">
-                          
-                            <button type="submit" class="fas fa-envelope" >  Send message</button>
-                        </div>
-                    </form>
+                    <form id="contact-form">
+    <div class="fields">
+        <div class="field name">
+            <input type="text" name="name" placeholder="Name" required>
+        </div>
+        <div class="field email">
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+    </div>
+    <div class="field">
+        <input type="number" name="phone" placeholder="Phone Number:" required>
+    </div>
+    <div class="field textarea">
+        <textarea name="message" cols="30" rows="10" placeholder="Message.." required></textarea>
+    </div>
+    <div class="button-area">
+        <button type="submit" class="fas fa-envelope"> Send message</button>
+    </div>
+</form>
+
+<p id="response-msg" style="margin-top: 10px;"></p>
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbySjA894VIop9TzrORriaoywY2WIaEGlLv-5TGUXjhwnAlWVyeB4GGKJy9ErLxhJb13/exec'; // ✅ Replace with your actual Google Apps Script Web App URL
+  const form = document.getElementById('contact-form');
+  const responseMsg = document.getElementById('response-msg');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      message: form.message.value
+    };
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      responseMsg.textContent = "✅ Message sent successfully!";
+      form.reset();
+    })
+    .catch(error => {
+      responseMsg.textContent = "❌ Failed to send message.";
+      console.error('Error!', error.message);
+    });
+  });
+</script>
+
                 </div>
             </div>
         </div>
