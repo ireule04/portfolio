@@ -245,34 +245,32 @@
 <p id="response-msg" style="margin-top: 10px;"></p>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbySjA894VIop9TzrORriaoywY2WIaEGlLv-5TGUXjhwnAlWVyeB4GGKJy9ErLxhJb13/exec'; // ✅ Replace with your actual Google Apps Script Web App URL
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbySjA894VIop9TzrORriaoywY2WIaEGlLv-5TGUXjhwnAlWVyeB4GGKJy9ErLxhJb13/exec';
   const form = document.getElementById('contact-form');
   const responseMsg = document.getElementById('response-msg');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
+    
+    responseMsg.textContent = "Sending...";
 
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      message: form.message.value
-    };
+    const formData = new FormData(form);
 
     fetch(scriptURL, {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: formData
     })
     .then(response => {
-      responseMsg.textContent = "✅ Message sent successfully!";
+      responseMsg.textContent = "Message sent successfully!";
       form.reset();
     })
     .catch(error => {
-      responseMsg.textContent = "❌ Failed to send message.";
       console.error('Error!', error.message);
+      responseMsg.textContent = "There was an error sending your message. Please try again later.";
     });
   });
 </script>
+
 
                 </div>
             </div>
