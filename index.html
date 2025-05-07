@@ -245,29 +245,29 @@
 <p id="response-msg" style="margin-top: 10px;"></p>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbySjA894VIop9TzrORriaoywY2WIaEGlLv-5TGUXjhwnAlWVyeB4GGKJy9ErLxhJb13/exec';
+  const scriptURL = 'https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_ID/exec';
   const form = document.getElementById('contact-form');
   const responseMsg = document.getElementById('response-msg');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    
-    responseMsg.textContent = "Sending...";
+    responseMsg.innerHTML = "Sending...";
 
     const formData = new FormData(form);
 
-    fetch(scriptURL, {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      responseMsg.textContent = "Message sent successfully!";
-      form.reset();
-    })
-    .catch(error => {
-      console.error('Error!', error.message);
-      responseMsg.textContent = "There was an error sending your message. Please try again later.";
-    });
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+        if (response.ok) {
+          responseMsg.innerHTML = "Message sent successfully!";
+          form.reset();
+        } else {
+          responseMsg.innerHTML = "There was an error sending your message. Please try again later.";
+        }
+      })
+      .catch(error => {
+        console.error("Error!", error.message);
+        responseMsg.innerHTML = "There was an error sending your message. Please try again later.";
+      });
   });
 </script>
 
